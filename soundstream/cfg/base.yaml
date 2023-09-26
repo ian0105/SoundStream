@@ -1,0 +1,61 @@
+# pytorch_lightning==1.8.1
+seed_everything: 2434
+trainer:
+  logger: WandbLogger
+  enable_checkpointing: true
+  callbacks: null
+  default_root_dir: null
+  gradient_clip_val: null
+  gradient_clip_algorithm: null
+  num_nodes: 1
+  devices: 1
+  enable_progress_bar: true
+  overfit_batches: 0.0
+  check_val_every_n_epoch: 1
+  fast_dev_run: false
+  accumulate_grad_batches: 1
+  max_epochs: 100000
+  min_epochs: null
+  max_steps: 20000000
+  min_steps: null
+  max_time: null
+  limit_train_batches: null
+  limit_val_batches: null
+  limit_test_batches: null
+  limit_predict_batches: null
+  val_check_interval: null
+  log_every_n_steps: 1
+  accelerator: gpu
+  strategy: ddp_find_unused_parameters_true
+  sync_batchnorm: false
+  enable_model_summary: true
+  num_sanity_val_steps: 2
+  profiler: null
+  benchmark: null
+  deterministic: null
+  reload_dataloaders_every_n_epochs: 0
+  inference_mode: true
+ckpt_path: null
+model:
+  class_path: lightning.Soundstream
+  init_args:
+    channel: 32
+    RVQ_dimension: 1
+    num_qunatizers: 8
+    codebook_size: 1024
+    num_downsampling: 3
+    downsampling_Factor: 2
+    n_fft: 1024
+    hop_length: 256
+    lambda_adv: 1
+    lambda_feat: 100
+    lambda_rec: 1
+    sample_rate: 24000
+data:
+  class_path: lightning.LightningData
+  init_args:
+    path: 'maestro-v3.0.0'
+    batch_size: 8
+    segment_time: 3
+    sampling_rate: 24000
+
